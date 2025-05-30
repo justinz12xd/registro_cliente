@@ -57,18 +57,40 @@
           <input type="password" placeholder="Contraseña" id="Password">
           <input type="password" placeholder="Repita su Contraseña" id="Password2">
         </form>
-        <!--Ingreso Clientes-->
-        <form action="" class="FormularioClientes">
-          <h2>Ingreso Clientes</h2>
-          <input type="text" placeholder="Nombre" id="nombreCliente">
-          <input type="text" placeholder="Apellidos" id="apellidoCliente">
-          <input type="text" placeholder="CUI" id="cui">
-          <input type="text" placeholder="Departamento" id="dep">
 
-        </form>
-      </div>
-
+        <!-- Ingreso Clientes -->
+        <form id="formClientes" class="FormularioClientes">
+        <h2>Ingreso Clientes</h2>
+        <input type="text" placeholder="Nombre" id="nombreCliente" name="nombreCliente" required>
+        <input type="text" placeholder="Apellidos" id="apellidoCliente" name="apellidoCliente" required>
+        <input type="text" placeholder="CUI" id="cui" name="cui" required>
+        <input type="text" placeholder="Departamento" id="dep" name="dep" required>
+        <button type="submit">Agregar Cliente</button>
+        </form>    
     </div>
+    <div class="container mt-4" id="seccionTablaClientes" style="width: 100%;">
+  <h3>Clientes Registrados</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>CUI</th>
+        <th>Departamento</th>
+      </tr>
+    </thead>
+    <tbody id="tablaClientes">
+      {% for cliente in clientes %}
+      <tr>
+        <td>{{ cliente[0] }}</td>
+        <td>{{ cliente[1] }}</td>
+        <td>{{ cliente[2] }}</td>
+        <td>{{ cliente[3] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
   </main>
 
   <script>
@@ -116,6 +138,41 @@
     // Al cargarse la página, mostramos el formulario correcto
     window.addEventListener("load", mostrarFormSegunHash);
   </script>
+    <script>
+    document.getElementById("formClientes").addEventListener("submit", function (e) {
+    e.preventDefault(); // Previene el envío normal del formulario
+
+    const formData = new FormData(this);
+
+    fetch("/agregar_cliente", {
+        method: "POST",
+        body: formData,
+    })
+        .then(response => response.json())
+        .then(data => {
+        if (data.success) {
+            // Limpiar formulario
+            document.getElementById("formClientes").reset();
+
+            // Actualizar tabla de clientes
+            const tbody = document.querySelector("tbody");
+            tbody.innerHTML = ""; // Limpiar filas anteriores
+
+            data.clientes.forEach(cliente => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${cliente[0]}</td>
+                <td>${cliente[1]}</td>
+                <td>${cliente[2]}</td>
+                <td>${cliente[3]}</td>`;
+            tbody.appendChild(row);
+            });
+        }
+        });
+    });
+    </script>
+
 </body>
+
 
 </html>

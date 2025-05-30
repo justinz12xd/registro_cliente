@@ -92,18 +92,16 @@ main{
   max-width: 350px;
   position: relative;
   top: -185px;
-  left: 10px;
-
-  /*Es para darle un efecto mas suave a la transicion*/
-  transition: left 500ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+  left: 30px;
 }
 
 .Login_Registro form{
   width: 100%;
-  padding: 80px 20px;
+  padding: 10px 10px;
   background: rgb(87, 0, 248);
-  position: absolute;
-  border-radius: 20px;
+  position: relative;
+  border-radius: 30px;
+  top: 250px;
 }
 
 .Login_Registro form h2{
@@ -136,18 +134,6 @@ main{
 }
 
 
-
-/*Para que se muestre y desaparezcan los formularios que estoy solicitando*/
-.FormularioLogin{
-  opacity: 1;
-  display: block;
-}
-.FormularioRegistro{
-  display: none;
-}
-
-.FormularioClientes{
-  opacity: 1;
-  display: none;
-
+#seccionTablaClientes {
+  margin-top: 40px;
 }
