@@ -3,81 +3,119 @@
 
 <head>
     <meta charset="utf-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
-    <title>Login y Registro</title>
+    <title>Registro de cliente</title>
     <link rel="stylesheet" href="css/estilos.css">
+
+    <style>
+        .FormularioRegistro,
+        .FormularioClientes {
+            display: none;
+        }
+    </style>
 </head>
 
-
 <body>
-    <main>
-        <!--Voy a agrupar en un solo contenedor todo-->
-        <div class="contenedor_general">
+  <main>
+    <div class="contenedor_general">
 
-            <!--Esta es la parte de atras que permanecera inmovil siempre-->
-            <div class="parte_fija">
-
-                <div class="login">
-                    <h3>¿Tienes una cuenta activa?</h3>
-                    <p>Inicia sesión para entrar a la página</p>
-                    <button id="btn_login">Iniciar Sesión</button>
-                </div>
-
-                <div class="registro">
-                    <h3>¿Aún no tienes una cuenta?</h3>
-                    <p>Regístrate para que puedas iniciar sesión</p>
-                    <button id="btn_registrarse">Regístrarse</button>
-                </div>
-
-                <div class="Clientes">
-                    <h3>¿Deseas registrar un nuevo Cliente?</h3>
-                    <p>Registra un nuevo cliente sin necesidad de iniciar Sesión</p>
-                    <button id="btn_clientes">Registro Clientes</button>
-                </div>
-            </div>
-
-            <!--Formulario de Login, registro e ingreso de clientes, estos cambiaran dependiendo del boton que aprima-->
-            <div class="Login_Registro">
-                <!--Login-->
-                <form action="" class="FormularioLogin">
-                    <h2>Iniciar Sesión</h2>
-                    <input type="email" placeholder="Correo Electronico" id="correo">
-                    <input type="password" placeholder="Contraseña" id="password">
-                    <button type="button" onclick="login() ">Iniciar Sesion</button>
-                </form>
-
-                <!--Registro-->
-                <form action="" class="FormularioRegistro">
-                    <h2>Regístrarse</h2>
-                    <input type="text" placeholder="Nombre completo" id="nombre">
-                    <input type="email" placeholder="Correo Electronico" id="email">
-                    <input type="password" placeholder="Contraseña" id="Password">
-                    <input type="password" placeholder="Repita su Contraseña" id="Password2">
-                    <button type="button" onclick="InicioSesion()">Regístrarse</button>
-                </form>
-
-                <!--Ingreso Clientes-->
-                <form action="" class="FormularioClientes">
-                    <h2>Ingreso Clientes</h2>
-                    <input type="text" placeholder="Nombre" id="nombreCliente">
-                    <input type="text" placeholder="Apellidos" id="apellidoCliente">
-                    <input type="text" placeholder="CUI" id="cui">
-                    <input type="text" placeholder="Departamento" id="dep">
-                    <button type="button" onclick="IngresoClientes()">Agregar Cliente</button>
-                </form>
-            </div>
-
+      <div class="parte_fija">
+        <div class="login">
+          <h3>¿Tienes una cuenta activa?</h3>
+          <p>Inicia sesión para entrar a la página</p>
+          <button id="btn_login">Iniciar Sesión</button>
         </div>
-    </main>
+        <div class="registro">
+          <h3>¿Aún no tienes una cuenta?</h3>
+          <p>Regístrate para que puedas iniciar sesión</p>
+          <button id="btn_registrarse">Regístrarse</button>
+        </div>
+        <div class="Clientes">
+          <h3>¿Deseas registrar un nuevo Cliente?</h3>
+          <p>Registra un nuevo cliente sin necesidad de iniciar Sesión</p>
+          <button id="btn_clientes">Registro Clientes</button>
+        </div>
+      </div>
 
-    <!--Llamo los scripts que utilizare-->
-  <!-- <script src="js/login.js"></script>-->
-   <!--<script src="js/CapturarDatosLogin.js"></script>-->
+      <div class="Login_Registro">
+        <!--Login-->
+        <form action="" class="FormularioLogin">
+          <h2>Iniciar Sesión</h2>
+          <input type="email" placeholder="Correo Electronico" id="correo">
+          <input type="password" placeholder="Contraseña" id="password">
+        </form>
+        <!--Registro-->
+        <form action="" class="FormularioRegistro">
+          <h2>Regístrarse</h2>
+          <input type="text" placeholder="Nombre completo" id="nombre">
+          <input type="email" placeholder="Correo Electronico" id="email">
+          <input type="password" placeholder="Contraseña" id="Password">
+          <input type="password" placeholder="Repita su Contraseña" id="Password2">
+        </form>
+        <!--Ingreso Clientes-->
+        <form action="" class="FormularioClientes">
+          <h2>Ingreso Clientes</h2>
+          <input type="text" placeholder="Nombre" id="nombreCliente">
+          <input type="text" placeholder="Apellidos" id="apellidoCliente">
+          <input type="text" placeholder="CUI" id="cui">
+          <input type="text" placeholder="Departamento" id="dep">
+
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    const btnLogin = document.getElementById("btn_login");
+    const btnRegistrarse = document.getElementById("btn_registrarse");
+    const btnClientes = document.getElementById("btn_clientes");
+
+    btnLogin.addEventListener("click", () => {
+      window.location.hash = "login";
+      window.location.reload();
+    });
+
+    btnRegistrarse.addEventListener("click", () => {
+      window.location.hash = "registro";
+      window.location.reload();
+    });
+
+    btnClientes.addEventListener("click", () => {
+      window.location.hash = "clientes";
+      window.location.reload();
+    });
+
+    function mostrarFormSegunHash() {
+      const hash = window.location.hash.replace("#", "");
+      const formLogin = document.querySelector(".FormularioLogin");
+      const formRegistro = document.querySelector(".FormularioRegistro");
+      const formClientes = document.querySelector(".FormularioClientes");
+
+      // Ocultar todos
+      formLogin.style.display = "none";
+      formRegistro.style.display = "none";
+      formClientes.style.display = "none";
+
+      // Mostrar el que corresponda
+      if (hash === "registro") {
+        formRegistro.style.display = "block";
+      } else if (hash === "clientes") {
+        formClientes.style.display = "block";
+      } else {
+        // Por defecto (o #login)
+        formLogin.style.display = "block";
+      }
+    }
+
+    // Al cargarse la página, mostramos el formulario correcto
+    window.addEventListener("load", mostrarFormSegunHash);
+  </script>
 </body>
 
 </html>
